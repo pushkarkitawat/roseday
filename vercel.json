@@ -3,6 +3,6 @@
     { "src": "rose.html", "use": "@vercel/static" }
   ],
   "routes": [
-    { "src": "/", "dest": "/index.html" }
+    { "src": "/", "dest": "/rose.html" }
   ]
 }
