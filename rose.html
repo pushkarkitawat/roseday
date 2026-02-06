@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body{
+  background: radial-gradient(circle, #300000, #000);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  color:white;
+  overflow:hidden;
+}
+
+/* Main Rose */
+.rose{
+  font-size:200px;
+  z-index:2;
+  animation: bloom 3s ease-in-out infinite;
+}
+@keyframes bloom{
+  0%{transform: scale(0.8);}
+  50%{transform: scale(1);}
+  100%{transform: scale(0.8);}
+}
+
+/* Text */
+.text2{
+  position:absolute;
+  bottom:10%;
+  font-size:28px;
+  z-index:2;
+  animation: fade 5s 2;
+}
+@keyframes fade{
+  0%{opacity:0;}
+  50%{opacity:1;}
+  100%{opacity:0;}
+}
+
+/* Petal Rain */
+.petal{
+  position:absolute;
+  top:-10%;
+  font-size:22px;
+  opacity:0.8;
+  pointer-events:none;
+  animation: fall linear;
+}
+
+@keyframes fall{
+  0%{
+    transform: translateY(0) rotate(0deg);
+    opacity:1;
+  }
+  100%{
+    transform: translateY(110vh) rotate(360deg);
+    opacity:0;
+  }
+}
+
+.text{
+  position:absolute;
+  bottom:15%;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:24px;
+  line-height:1.6;
+  white-space:nowrap;
+  overflow:hidden;
+  border-right:2px solid rgba(255,255,255,0.8);
+  text-align:center;
+  animation: typing 5s steps(40,end) 1,
+             caret 0.8s step-end infinite;
+}
+
+
+/* Typing animation */
+@keyframes typing{
+  0%{
+    width:0;
+    opacity:0;
+  }
+  30%{
+    opacity:1;
+  }
+  60%{
+    width:30%;
+  }
+  85%{
+    width:30%;
+  }
+  100%{
+    width:30%;
+    opacity:1;
+  }
+}
+
+
+/* Cursor blink */
+@keyframes caret{
+  0%,100%{border-color:transparent;}
+  50%{border-color:white;}
+}
+
+</style>
+
+
+</head>
+
+<body>
+<div id="petal-container"></div>
+
+
+  <!-- Center Rose -->
+  <div class="rose">🌹</div>
+
+<div class="text">
+    इश्क़ अब शोर नहीं करता,
+    बस तेरा नाम लेकर ठहर जाता है।
+  </div>
+ <div class="text2">Happy Rose Day ❤️</div>
+
+</body>
+<script>
+const emojis = ["🌸","🌺","🌷","❤️"];
+const container = document.getElementById("petal-container");
+
+function createPetal(){
+  const petal = document.createElement("span");
+  petal.className = "petal";
+
+  // Random emoji
+  petal.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+
+  // Random position
+  petal.style.left = Math.random() * 100 + "vw";
+
+  // Random size
+  const size = Math.random() * 14 + 16;
+  petal.style.fontSize = size + "px";
+
+  // Random fall duration
+  const duration = Math.random() * 4 + 6;
+  petal.style.animationDuration = duration + "s";
+
+  container.appendChild(petal);
+
+  // Remove after fall ends
+  setTimeout(() => {
+    petal.remove();
+  }, duration * 1000);
+}
+
+// Continuous rain
+setInterval(createPetal, 300);
+</script>
+</html>
